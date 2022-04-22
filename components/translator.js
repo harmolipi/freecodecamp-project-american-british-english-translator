@@ -14,6 +14,7 @@ class Translator {
 
   americanToBritish(text) {
     const isAmericanTime = /^[01]*[0-9]+:[1-6]*[0-9]+$/;
+    const isAmericanTitle = (word) => Object.keys(americanToBritishTitles).include(word);
 
     const translatedText = text.map((word) => {
       if (isAmericanTime.test(word)) {
