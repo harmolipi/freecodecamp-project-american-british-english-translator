@@ -8,15 +8,12 @@ class Translator {
       const error = this.validateInput(text, locale);
       if (error.length > 0) return { error };
       
-      const wordMap =
-          locale === 'american-to-british' ? americanOnly : britishOnly;
       const splitText = text.split(' ');
       const translation =
           locale === 'american-to-british' ?
           this.americanToBritish(splitText) :
           this.britishToAmerican(splitText);
     
-
       return translation.join(' ');
     }
 
