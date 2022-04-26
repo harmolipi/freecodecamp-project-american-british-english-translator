@@ -5,16 +5,39 @@ const britishOnly = require('./british-only.js');
 
 class Translator {
     translate(text, locale) {
-        const wordMap =
-            locale === 'american-to-british' ? americanOnly : britishOnly;
-        const splitText = text.split(' ');
-        const translation =
-            locale === 'american-to-british' ?
-            this.americanToBritish(splitText) :
-            this.britishToAmerican(splitText);
+      const error = this.validateInput(text, locale);
+      if (error.length > 0) return { error };
+      
+      const wordMap =
+          locale === 'american-to-british' ? americanOnly : britishOnly;
+      const splitText = text.split(' ');
+      const translation =
+          locale === 'american-to-british' ?
+          this.americanToBritish(splitText) :
+          this.britishToAmerican(splitText);
+    
 
-        return translation.join(' ');
+      return translation.join(' ');
     }
+
+  validateInput(text, locale) {
+    const validLocales = [
+      'american-to-british',
+      'british-to-american'
+    ];
+    let error = '';
+  
+    if (text === '') {
+      error = 'No text to translate';
+    } else if (!text || !locale) {
+      error = 'Required field(s) missing';
+    } else if (!validLocales.includes(locale)) {
+      error = 'Invalid value for locale field';
+    }
+
+    console.log('error', error);
+    return error;
+  }
 
     americanToBritish(text) {
         const isAmericanTime = /^[01]*[0-9]+:[1-6]*[0-9]+$/;

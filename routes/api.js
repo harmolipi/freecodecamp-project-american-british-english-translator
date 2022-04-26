@@ -12,6 +12,10 @@ module.exports = function (app) {
       const locale = req.body.locale;
       const translation = translator.translate(text, locale);
 
-      res.json({text, translation});
+      if (translation.error) {
+        res.json(translation);
+      } else {
+        res.json({text, translation});
+      }
     });
 };
