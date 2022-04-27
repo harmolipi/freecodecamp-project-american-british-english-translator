@@ -23,6 +23,9 @@ class Translator {
             this.americanToBritish(text) :
             this.britishToAmerican(text);
 
+        console.log(translation);
+        console.log(text);
+        
         return translation.toLowerCase() === text.toLowerCase() ? 'Everything looks good to me!' : this.capitalize(translation);
     }
 
@@ -50,7 +53,7 @@ class Translator {
         });
 
         Object.keys(americanOnly).forEach((word) => {
-            const wordCheck = new RegExp(word, 'i')
+            const wordCheck = new RegExp(`${word}\\b`, 'i')
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(americanOnly[word])
@@ -77,15 +80,17 @@ class Translator {
     }
 
     britishToAmerican(text) {
-        const britishTime = /^[01]*[0-9]+.[1-6]+[0-9]+$/;
+        const britishTime = /[01]*[0-9].[0-6][0-9]/;
         let translated = text;
 
         translated = translated.replace(britishTime, (time) => {
             return this.highlightText(time.replace('.', ':'));
         });
 
+        console.log(translated);
+
         Object.keys(britishOnly).forEach((word) => {
-            const wordCheck = new RegExp(word, 'i')
+            const wordCheck = new RegExp(`${word}\\b`, 'i')
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(britishOnly[word])
@@ -101,7 +106,7 @@ class Translator {
         });
 
         Object.keys(britishToAmericanTitles).forEach((word) => {
-            const wordCheck = new RegExp(word, 'i')
+            const wordCheck = new RegExp(`${word}\\b`, 'i')
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(this.capitalize(britishToAmericanTitles[word]))
