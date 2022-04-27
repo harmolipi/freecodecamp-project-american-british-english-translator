@@ -2,25 +2,28 @@ const americanOnly = require('./american-only.js');
 const americanToBritishSpelling = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require('./american-to-british-titles.js');
 const britishOnly = require('./british-only.js');
+const britishToAmericanSpelling = {};
+const britishToAmericanTitles = {};
+
+Object.keys(americanToBritishSpelling).forEach((word) => {
+    britishToAmericanSpelling[americanToBritishSpelling[word]] = word;
+});
+
+Object.keys(americanToBritishTitles).forEach((word) => {
+    britishToAmericanTitles[americanToBritishTitles[word]] = word;
+});
 
 class Translator {
     translate(text, locale) {
         const error = this.validateInput(text, locale);
         if (error.length > 0) return { error };
 
-        const splitText = text.split(' ');
-        //   const translation =
-        //       locale === 'american-to-british' ?
-        //       this.americanToBritish(splitText) :
-        //       this.britishToAmerican(splitText);
-
         const translation =
             locale === 'american-to-british' ?
             this.americanToBritish(text) :
             this.britishToAmerican(text);
 
-        return translation;
-        // return translation.join(' ');
+        return translation.toLowerCase() === text.toLowerCase() ? 'Everything looks good to me!' : this.capitalize(translation);
     }
 
     validateInput(text, locale) {
@@ -35,89 +38,85 @@ class Translator {
             error = 'Invalid value for locale field';
         }
 
-        console.log('error', error);
         return error;
     }
 
     americanToBritish(text) {
-        const isAmericanTime = /^[01]*[0-9]+:[1-6]*[0-9]+$/;
-        const isAmericanTitle = (word) =>
-            Object.keys(americanToBritishTitles).includes(word);
+        const americanTime = /[01]*[0-9]+:[1-6]+[0-9]+/;
+        let translated = text;
+
+        translated = translated.replace(americanTime, (time) => {
+            return this.highlightText(time.replace(':', '.'));
+        });
 
         Object.keys(americanOnly).forEach((word) => {
-            let translated = text.replace(
-                word,
-                `<span class="highlight">${americanOnly[word]}</span>`
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(americanOnly[word])
             );
-            text = translated;
         });
 
         Object.keys(americanToBritishSpelling).forEach((word) => {
-            let translated = text.replace(
-                word,
-                `<span class="highlight">${americanToBritishSpelling[word]}</span>`
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(americanToBritishSpelling[word])
             );
-            text = translated;
         });
 
         Object.keys(americanToBritishTitles).forEach((word) => {
-            let translated = text.replace(
-                word,
-                `<span class="highlight">${americanToBritishTitles[word]}</span>`
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(this.capitalize(americanToBritishTitles[word]))
             );
-            text = translated;
         });
 
-        return text;
-    }
-
-    americanToBritishOld(text) {
-        const isAmericanTime = /^[01]*[0-9]+:[1-6]*[0-9]+$/;
-        const isAmericanTitle = (word) =>
-            Object.keys(americanToBritishTitles).includes(word);
-
-        const translatedText = text.map((word) => {
-            if (isAmericanTime.test(word)) {
-                return word.replace(':', '.');
-            } else if (isAmericanTitle(word)) {
-                return americanToBritishTitles[word];
-            } else if (americanToBritishSpelling[word]) {
-                return americanToBritishSpelling[word];
-            } else {
-                return word;
-            }
-        });
-
-        return translatedText;
+        return translated;
     }
 
     britishToAmerican(text) {
-        const isBritishTime = /^[01]*[0-9]+.[1-6]*[0-9]+$/;
+        const britishTime = /^[01]*[0-9]+.[1-6]+[0-9]+$/;
+        let translated = text;
 
-        const translatedText = text.map((word) => {
-            if (isBritishTime.test(word)) {
-                return word.replace('.', ':');
-            } else if (americanToBritishTitles[word]) {
-                return americanToBritishTitles[word];
-            } else if (Object.values(americanToBritishSpelling).includes(word)) {
-                console.log(
-                    Object.values(americanToBritishSpelling).find(
-                        (key) => americanToBritishSpelling[key] === word
-                    )
-                );
-                return Object.values(americanToBritishSpelling).find(
-                    (key) => americanToBritishSpelling[key] === word
-                );
-            } else {
-                return word;
-            }
+        translated = translated.replace(britishTime, (time) => {
+            return this.highlightText(time.replace('.', ':'));
         });
 
-        return translatedText;
+        Object.keys(britishOnly).forEach((word) => {
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(britishOnly[word])
+            );
+        });
+
+        Object.keys(britishToAmericanSpelling).forEach((word) => {
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(britishToAmericanSpelling[word])
+            );
+        });
+
+        Object.keys(britishToAmericanTitles).forEach((word) => {
+            const wordCheck = new RegExp(word, 'i')
+            translated = translated.replace(
+                wordCheck,
+                this.highlightText(this.capitalize(britishToAmericanTitles[word]))
+            );
+        });
+
+        return translated;
+    }
+
+    highlightText(text) {
+        return `<span class="highlight">${text}</span>`;
     }
 
     capitalize(word) {
-        return `${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`;
+        return `${word[0].toUpperCase()}${word.slice(1)}`;
     }
 }
 
