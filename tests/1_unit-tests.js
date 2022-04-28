@@ -60,7 +60,7 @@ suite('Unit Tests', () => {
 
             assert.equal(
                 americanToBritish,
-                'Like a high tech <span class="highlight">Heath Robinson</span> device.'
+                'Like a high tech <span class="highlight">Heath Robinson device</span>.'
             );
         });
 
@@ -143,7 +143,7 @@ suite('Unit Tests', () => {
 
             assert.equal(
                 britishtoAmerican,
-                'I spent the <span class="highlight">public</span> holiday at the carnival.'
+                'I spent the <span class="highlight">public holiday</span> at the <span class="highlight">carnival</span>.'
             );
         });
 
@@ -155,7 +155,7 @@ suite('Unit Tests', () => {
 
             assert.equal(
                 britishtoAmerican,
-                'I had a <span class="highlight">cookie</span> then went to the fish-and-chip shop.'
+                'I had a <span class="highlight">cookie</span> then went to the <span class="highlight">fish-and-chip shop</span>.'
             );
         });
 
