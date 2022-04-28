@@ -22,8 +22,10 @@ class Translator {
             locale === 'american-to-british' ?
             this.americanToBritish(text) :
             this.britishToAmerican(text);
-        
-        return translation.toLowerCase() === text.toLowerCase() ? 'Everything looks good to me!' : this.capitalize(translation);
+
+        return translation.toLowerCase() === text.toLowerCase() ?
+            'Everything looks good to me!' :
+            this.capitalize(translation);
     }
 
     validateInput(text, locale) {
@@ -50,7 +52,7 @@ class Translator {
         });
 
         Object.keys(americanOnly).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i');
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(americanOnly[word])
@@ -58,7 +60,7 @@ class Translator {
         });
 
         Object.keys(americanToBritishSpelling).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i');
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(americanToBritishSpelling[word])
@@ -66,7 +68,7 @@ class Translator {
         });
 
         Object.keys(americanToBritishTitles).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}`, 'i');
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(this.capitalize(americanToBritishTitles[word]))
@@ -85,7 +87,7 @@ class Translator {
         });
 
         Object.keys(britishOnly).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i');
             translated = translated.replace(
                 wordCheck,
                 `${this.highlightText(britishOnly[word])}`
@@ -93,7 +95,7 @@ class Translator {
         });
 
         Object.keys(britishToAmericanSpelling).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i');
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(britishToAmericanSpelling[word])
@@ -101,7 +103,7 @@ class Translator {
         });
 
         Object.keys(britishToAmericanTitles).forEach((word) => {
-            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i')
+            const wordCheck = new RegExp(`(?<!-)\\b${word}\\b`, 'i');
             translated = translated.replace(
                 wordCheck,
                 this.highlightText(this.capitalize(britishToAmericanTitles[word]))

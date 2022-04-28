@@ -13,7 +13,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'Mangoes are my <span class="highlight">favourite</span> fruit.');
+            assert.equal(
+                americanToBritish,
+                'Mangoes are my <span class="highlight">favourite</span> fruit.'
+            );
         });
 
         test('Translate I ate yogurt for breakfast. to British English', () => {
@@ -22,7 +25,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'I ate <span class="highlight">yoghurt</span> for breakfast.');
+            assert.equal(
+                americanToBritish,
+                'I ate <span class="highlight">yoghurt</span> for breakfast.'
+            );
         });
 
         test(`Translate "We had a party at my friend's condo." to British English`, () => {
@@ -31,7 +37,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, `We had a party at my friend's <span class="highlight">flat</span>.`);
+            assert.equal(
+                americanToBritish,
+                `We had a party at my friend's <span class="highlight">flat</span>.`
+            );
         });
 
         test(`Translate "Can you toss this in the trashcan for me?" to British English`, () => {
@@ -40,7 +49,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'Can you toss this in the <span class="highlight">bin</span> for me?');
+            assert.equal(
+                americanToBritish,
+                'Can you toss this in the <span class="highlight">bin</span> for me?'
+            );
         });
 
         test(`Translate "The parking lot was full." to British English`, () => {
@@ -49,7 +61,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'The <span class="highlight">car park</span> was full.');
+            assert.equal(
+                americanToBritish,
+                'The <span class="highlight">car park</span> was full.'
+            );
         });
 
         test(`Translate "Like a high tech Rube Goldberg machine." to British English`, () => {
@@ -82,7 +97,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'No <span class="highlight">Mr</span> Bond, I expect you to die.');
+            assert.equal(
+                americanToBritish,
+                'No <span class="highlight">Mr</span> Bond, I expect you to die.'
+            );
         });
 
         test(`Dr. Grosh will see you now." to British English`, () => {
@@ -91,7 +109,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, '<span class="highlight">Dr</span> Grosh will see you now.');
+            assert.equal(
+                americanToBritish,
+                '<span class="highlight">Dr</span> Grosh will see you now.'
+            );
         });
 
         test(`Translate "Lunch is at 12:15 today." to British English`, () => {
@@ -100,7 +121,10 @@ suite('Unit Tests', () => {
                 'american-to-british'
             );
 
-            assert.equal(americanToBritish, 'Lunch is at <span class="highlight">12.15</span> today.');
+            assert.equal(
+                americanToBritish,
+                'Lunch is at <span class="highlight">12.15</span> today.'
+            );
         });
     });
 
@@ -123,7 +147,10 @@ suite('Unit Tests', () => {
                 'british-to-american'
             );
 
-            assert.equal(britishtoAmerican, '<span class="highlight">Tylenol</span> takes up to an hour to work.');
+            assert.equal(
+                britishtoAmerican,
+                '<span class="highlight">Tylenol</span> takes up to an hour to work.'
+            );
         });
 
         test(`Translate "First, caramelise the onions." to American English`, () => {
@@ -132,7 +159,10 @@ suite('Unit Tests', () => {
                 'british-to-american'
             );
 
-            assert.equal(britishtoAmerican, 'First, <span class="highlight">caramelize</span> the onions.');
+            assert.equal(
+                britishtoAmerican,
+                'First, <span class="highlight">caramelize</span> the onions.'
+            );
         });
 
         test(`Translate "I spent the bank holiday at the funfair." to American English`, () => {
@@ -189,7 +219,10 @@ suite('Unit Tests', () => {
                 'british-to-american'
             );
 
-            assert.equal(britishtoAmerican, 'Have you met <span class="highlight">Mrs.</span> Kalyani?');
+            assert.equal(
+                britishtoAmerican,
+                'Have you met <span class="highlight">Mrs.</span> Kalyani?'
+            );
         });
 
         test(`Translate "Prof Joyner of King's College, London." to American English`, () => {
@@ -210,14 +243,18 @@ suite('Unit Tests', () => {
                 'british-to-american'
             );
 
-            assert.equal(britishtoAmerican, 'Tea time is usually around 4 or <span class="highlight">4:30</span>.');
+            assert.equal(
+                britishtoAmerican,
+                'Tea time is usually around 4 or <span class="highlight">4:30</span>.'
+            );
         });
     });
 
     suite('Highlight translations', () => {
         test(`Highlight translation in "Mangoes are my favorite fruit."`, () => {
             const highlightedTranslation = translator.translate(
-                'Mangoes are my favorite fruit.', 'american-to-british'
+                'Mangoes are my favorite fruit.',
+                'american-to-british'
             );
 
             assert.equal(
@@ -228,7 +265,8 @@ suite('Unit Tests', () => {
 
         test(`Highlight translation in "I ate yogurt for breakfast."`, () => {
             const highlightedTranslation = translator.translate(
-                'I ate yogurt for breakfast.', 'american-to-british'
+                'I ate yogurt for breakfast.',
+                'american-to-british'
             );
 
             assert.equal(
@@ -239,7 +277,8 @@ suite('Unit Tests', () => {
 
         test(`Highlight translation in "We watched the footie match for a while."`, () => {
             const highlightedTranslation = translator.translate(
-                'We watched the footie match for a while.', 'british-to-american'
+                'We watched the footie match for a while.',
+                'british-to-american'
             );
 
             assert.equal(
@@ -250,7 +289,8 @@ suite('Unit Tests', () => {
 
         test(`Highlight translation in "Paracetamol takes up to an hour to work."`, () => {
             const highlightedTranslation = translator.translate(
-                'Paracetamol takes up to an hour to work.', 'british-to-american'
+                'Paracetamol takes up to an hour to work.',
+                'british-to-american'
             );
 
             assert.equal(

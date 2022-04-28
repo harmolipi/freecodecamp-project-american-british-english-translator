@@ -10,7 +10,7 @@ let Translator = require('../components/translator.js');
 const validInput = {
     text: 'I like to play soccer.',
     locale: 'american-to-british',
-}
+};
 
 suite('Functional Tests', () => {
     test('Translation with text and locale fields: POST request to /api/translate', (done) => {
@@ -21,7 +21,10 @@ suite('Functional Tests', () => {
             .end((_err, res) => {
                 assert.equal(res.status, 200);
                 assert.equal(res.body.text, 'I like to play soccer.');
-                assert.equal(res.body.translation, 'I like to play <span class="highlight">football</span>.');
+                assert.equal(
+                    res.body.translation,
+                    'I like to play <span class="highlight">football</span>.'
+                );
                 done();
             });
     });
