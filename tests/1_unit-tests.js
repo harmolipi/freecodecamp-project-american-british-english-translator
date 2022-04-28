@@ -214,49 +214,49 @@ suite('Unit Tests', () => {
         });
     });
 
-    // suite('Highlight translations', () => {
-    //     test(`Highlight translation in "Mangoes are my favorite fruit."`, () => {
-    //         const highlightedTranslation = translator.highlightTranslation(
-    //             'Mangoes are my favourite fruit.'
-    //         );
+    suite('Highlight translations', () => {
+        test(`Highlight translation in "Mangoes are my favorite fruit."`, () => {
+            const highlightedTranslation = translator.translate(
+                'Mangoes are my favorite fruit.', 'american-to-british'
+            );
 
-    //         assert.equal(
-    //             highlightedTranslation,
-    //             'Mangoes are my <span class="highlight">favourite</span> fruit.'
-    //         );
-    //     });
+            assert.equal(
+                highlightedTranslation,
+                'Mangoes are my <span class="highlight">favourite</span> fruit.'
+            );
+        });
 
-    //     test(`Highlight translation in "I ate yogurt for breakfast."`, () => {
-    //         const highlightedTranslation = translator.highlightTranslation(
-    //             'I ate yogurt for breakfast.'
-    //         );
+        test(`Highlight translation in "I ate yogurt for breakfast."`, () => {
+            const highlightedTranslation = translator.translate(
+                'I ate yogurt for breakfast.', 'american-to-british'
+            );
 
-    //         assert.equal(
-    //             highlightedTranslation,
-    //             'I ate <span class="highlight">yoghurt</span> for breakfast.'
-    //         );
-    //     });
+            assert.equal(
+                highlightedTranslation,
+                'I ate <span class="highlight">yoghurt</span> for breakfast.'
+            );
+        });
 
-    //     test(`Highlight translation in "We watched the footie match for a while."`, () => {
-    //         const highlightedTranslation = translator.highlightTranslation(
-    //             'We watched the footie match for a while.'
-    //         );
+        test(`Highlight translation in "We watched the footie match for a while."`, () => {
+            const highlightedTranslation = translator.translate(
+                'We watched the footie match for a while.', 'british-to-american'
+            );
 
-    //         assert.equal(
-    //             highlightedTranslation,
-    //             'We watched the <span class="highlight">soccer</span> match for a while.'
-    //         );
-    //     });
+            assert.equal(
+                highlightedTranslation,
+                'We watched the <span class="highlight">soccer</span> match for a while.'
+            );
+        });
 
-    //     test(`Highlight translation in "Paracetamol takes up to an hour to work."`, () => {
-    //         const highlightedTranslation = translator.highlightTranslation(
-    //             'Paracetamol takes up to an hour to work.'
-    //         );
+        test(`Highlight translation in "Paracetamol takes up to an hour to work."`, () => {
+            const highlightedTranslation = translator.translate(
+                'Paracetamol takes up to an hour to work.', 'british-to-american'
+            );
 
-    //         assert.equal(
-    //             highlightedTranslation,
-    //             '<span class="highlight">Paracetamol</span> takes up to an hour to work.'
-    //         );
-    //     });
-    // });
+            assert.equal(
+                highlightedTranslation,
+                '<span class="highlight">Tylenol</span> takes up to an hour to work.'
+            );
+        });
+    });
 });
